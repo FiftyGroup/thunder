@@ -1,5 +1,5 @@
-import  BaseError  from "./base-error";
-import { ISerializeError } from "./not-found-error";
+import BaseError from './base-error';
+import { ISerializeError } from './not-found-error';
 
 export default class BadRequestError extends BaseError {
   statusCode = 400;
