@@ -1,4 +1,4 @@
-import  BaseError  from "./base-error";
+import BaseError from './base-error';
 
 export default class NotFoundError extends BaseError {
   statusCode = 404;
