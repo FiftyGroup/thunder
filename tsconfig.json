@@ -1,11 +1,15 @@
 {
-    "compilerOptions": {
-      "experimentalDecorators": true,
-      "outDir": "./build",
-      "esModuleInterop": true,
-      "target": "ES2019",
-      "module": "commonjs"
-    },
-  
-    "include": ["src/**/*.ts"]
-  }
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "outDir": "./dir",
+    "esModuleInterop": true,
+    "target": "ES2019",
+    "module": "commonjs"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+}
