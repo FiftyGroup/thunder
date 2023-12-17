@@ -6,4 +6,10 @@ import { ValidationMiddleware } from '../middlewares';
 export default (router: express.Router) => {
   router.post('/auth/register', ValidationMiddleware, RegisterController);
   router.post('/auth/login', ValidationMiddleware, LoginController);
+  router.delete(
+      "/auth/logout",
+      authMiddleware,
+      ValidationMiddleware(LogoutDTO),
+      logoutController
+    );
 };
