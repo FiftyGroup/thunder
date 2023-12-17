@@ -1,15 +1,15 @@
-import express from "express";
-import { RegisterController } from "../controllers/auth/register-user-controller";
-import { authMiddleware, ValidationMiddleware } from "../middlewares/index";
-import { logoutController } from "../controllers/auth/logout-controller";
-import { LogoutDTO } from "../controllers/auth/DTOs/logout-dto";
+import express from 'express';
+import { RegisterController } from '../controllers/auth/register-user-controller';
+import { LoginController } from '../controllers/auth/login-user-controller';
+import { ValidationMiddleware } from '../middlewares';
 
 export default (router: express.Router) => {
-  router.get("/auth/register", authMiddleware, RegisterController);
+  router.post('/auth/register', ValidationMiddleware, RegisterController);
+  router.post('/auth/login', ValidationMiddleware, LoginController);
   router.delete(
-    "/auth/logout",
-    authMiddleware,
-    ValidationMiddleware(LogoutDTO),
-    logoutController
-  );
+      "/auth/logout",
+      authMiddleware,
+      ValidationMiddleware(LogoutDTO),
+      logoutController
+    );
 };
