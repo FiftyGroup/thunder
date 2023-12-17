@@ -28,7 +28,6 @@ class ValidationMiddleware {
       for (const field in req.body) {
         instancedDTO[field] = req.body[field];
       }
-      console.log(instancedDTO);
       const errors = await this.validator(instancedDTO);
       if (errors.length > 0) {
         throw new BadRequestError(errors);
