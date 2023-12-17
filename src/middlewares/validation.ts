@@ -25,13 +25,14 @@ class ValidationMiddleware {
   handle(dto: any) {
     return async (req: Request, _, next: NextFunction) => {
       const instancedDTO = new dto();
-      for (const field in instancedDTO) {
-        if (req.body[field]) {
-          instancedDTO[field] = req.body[field];
-        }
+      for (const field in req.body) {
+        instancedDTO[field] = req.body[field];
       }
+      console.log(instancedDTO);
       const errors = await this.validator(instancedDTO);
-      throw new BadRequestError(errors);
+      if (errors.length > 0) {
+        throw new BadRequestError(errors);
+      }
       next();
     };
   }
