@@ -8,12 +8,12 @@ datasource db {
 }
 model User {
   id           String      @unique   @id @default(uuid())
-  username     String       @unique
-  role         String       
+  username     String      @unique
+  role         String      @default("user") 
   password     String
   fullName     String
   email        String       @unique
-  isVerified   Boolean      @default(false)
+  isVerified   Boolean      @default(true)
   createdAt    DateTime     @default(now())
   deletedAt    DateTime?
   emailVerification EmailVerification[]

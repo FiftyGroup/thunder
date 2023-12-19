@@ -1,6 +1,9 @@
-// import { prisma } from '../../utils/prisma'
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
+import { RegisterService } from '../../services/register-service';
 
 export const RegisterController = async (req: Request, res: Response) => {
-  res.send("Body validated!");
+  const { fullName, username, email, password } = req.body;
+  await RegisterService(fullName, username, email, password);
+
+  return res.status(201).json({ message: 'Registro bem-sucedido' });
 };
