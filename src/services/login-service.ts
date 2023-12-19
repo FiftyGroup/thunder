@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import jvt from "jsonwebtoken";
 import Unauthorized from "../errors/unauthorized-error";
 
@@ -15,7 +15,7 @@ export const loginService = async (username: string, password: string) => {
     throw new Unauthorized("Invalid username or password");
   }
 
-  const equalPassword = await bcrypt.compare(password, user.password);
+  const equalPassword = await bcryptjs.compare(password, user.password);
   if (!equalPassword) {
     throw new Unauthorized("Invalid username or password");
   }
