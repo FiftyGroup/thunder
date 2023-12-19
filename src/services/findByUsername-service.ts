@@ -1,3 +1,4 @@
+import BadRequestError from '../errors/bad-request-error';
 import NotFoundError from '../errors/not-found-error';
 import { prisma } from '../utils/prisma';
 
@@ -19,8 +20,5 @@ export const findByUsernameService = async (
   if (!searchUsername) {
     throw new NotFoundError('Usuário não encontrado.');
   }
-
-  if (searchUsername) {
-    return searchUsername;
-  }
+  return searchUsername;
 };

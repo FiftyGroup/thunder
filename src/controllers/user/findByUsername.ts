@@ -4,7 +4,7 @@ import NotFoundError from '../../errors/not-found-error';
 
 export const findByUsername = async (req: Request, res: Response) => {
   const { username } = req.params;
-  const userResult = await findByUsernameService(username);
+  const User = await findByUsernameService(username);
 
-  return res.status(200).json({ userResult })
+  return res.status(200).json({ User })
 }
