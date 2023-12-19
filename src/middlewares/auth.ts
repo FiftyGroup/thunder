@@ -1,9 +1,11 @@
-import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import { config } from "dotenv";
-import { Unauthorized } from "../errors";
-config();
-const SECRET = process.env.JWT_SECRET;
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { Unauthorized } from '../errors';
+import config from '../config/custom-environment-variables'
+
+dotenv.config();
+
 const authMiddleware = async (
   req: Request,
   res: Response,
@@ -12,7 +14,7 @@ const authMiddleware = async (
   try {
     const authHeader = req.headers.authorization;
     const token = authHeader.split(" ")[1];
-    const { id, username } = jwt.verify(token, SECRET) as unknown as any;
+    const { id, username } = jwt.verify(token, config.JWT_SECRET) as unknown as any;
     req.user = {
       id,
       username,

@@ -1,4 +1,4 @@
-import  BaseError  from "./base-error";
+import BaseError from './base-error';
 
 export default class ForbiddenError extends BaseError {
   statusCode = 403;

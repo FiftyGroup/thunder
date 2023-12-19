@@ -2,7 +2,7 @@ import BaseError from "./base-error";
 import { ISerializeError } from "./not-found-error";
 
 export default class ConflictError extends BaseError {
-  statusCode = 400;
+  statusCode = 409;
   reason: ISerializeError[];
   constructor(message: ISerializeError[]) {
     super();
