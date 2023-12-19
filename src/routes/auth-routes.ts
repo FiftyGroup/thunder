@@ -9,16 +9,6 @@ import { LoginDTO } from "../controllers/auth/DTOs/login-dto";
 
 export default (router: express.Router) => {
   router.post("/auth/login", ValidationMiddleware(LoginDTO), LoginController);
-  router.post(
-    "/auth/register",
-    ValidationMiddleware(RegisterDTO),
-    RegisterController
-  );
-  router.post("/auth/login", ValidationMiddleware, LoginController);
-  router.delete(
-    "/auth/logout",
-    authMiddleware,
-    ValidationMiddleware(LogoutDTO),
-    logoutController
-  );
+  router.post("/auth/register", ValidationMiddleware(RegisterDTO), RegisterController);
+  router.delete("/auth/logout", authMiddleware, ValidationMiddleware(LogoutDTO), logoutController);
 };
