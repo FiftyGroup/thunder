@@ -6,41 +6,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
-  id           String      @unique   @id @default(uuid())
-  username     String      @unique
-  role         String      @default("user") 
-  password     String
-  fullName     String
-  email        String       @unique
-  isVerified   Boolean      @default(true)
-  createdAt    DateTime     @default(now())
-  deletedAt    DateTime?
+  id                String              @id @unique @default(uuid())
+  username          String              @unique
+  role              String              @default("user")
+  password          String
+  fullName          String
+  email             String              @unique
+  isVerified        Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  deletedAt         DateTime?
   emailVerification EmailVerification[]
   sessions          Session[]
+  Recovery          Recovery[]
 }
 
 model EmailVerification {
-  id         String @unique   @id @default(uuid())
+  id         String   @id @unique @default(uuid())
   username   String
   email      String
   secretCode String
   used       Boolean  @default(false)
   createdAt  DateTime @default(now())
   expiredAt  DateTime
-  userId String
-  user User @relation(fields: [userId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model Session {
-  id         String @unique   @id @default(uuid())
-  username   String @unique
+  id           String   @id @unique @default(uuid())
+  username     String   @unique
   refreshToken String
-  userAgent  String
-  ip         String
-  blocked    Boolean  @default(false)
+  userAgent    String
+  ip           String
+  blocked      Boolean  @default(false)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model Recovery {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  secretCode String   @db.VarChar(150)
+  used       Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
   expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  userId String
-  user User @relation(fields: [userId], references: [id])
+
+  @@map(name: "Recovery")
 }
