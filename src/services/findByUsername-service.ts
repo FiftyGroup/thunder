@@ -5,6 +5,10 @@ import { prisma } from '../utils/prisma';
 export const findByUsernameService = async (
   username: string,
 ) => {
+  if (username.length > 15) {
+    throw new NotFoundError('Username muito grande.');
+  }
+
   const searchUsername = await prisma.user.findUnique({
     where: {
       username,
