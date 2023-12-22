@@ -1,6 +1,7 @@
 import { prisma } from '../utils/prisma';
 import ConflictError from '../errors/conflict-error';
 import { hash, genSalt } from 'bcryptjs'
+import { MailProducer } from '../app';
 
 export const RegisterService = async (
   fullName: string,
@@ -49,4 +50,12 @@ export const RegisterService = async (
       role: 'user',
     },
   });
+  await MailProducer.publish({
+    type:"ACCOUNT_CREATED",
+    data:{
+      fullName,
+      username,
+      email,
+    }
+  })
 };
