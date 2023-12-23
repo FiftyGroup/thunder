@@ -7,16 +7,3 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
-  mailer:
-    image: "fiftydev/mailer:latest"
-    container_name: "mailer-service"
-    restart: always
-    environment:
-      - EMAIL_HOST=smtp-relay.brevo.com
-      - EMAIL_PORT=587
-      - EMAIL_USERNAME=coredevbr@gmail.com
-      - EMAIL_PASSWORD=OaN1CSGKxpjE62Hh
-      - DISPLAY_NAME=Core
-    depends_on:
-      - rabbitmq
