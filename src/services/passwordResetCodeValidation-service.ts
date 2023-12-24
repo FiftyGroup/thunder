@@ -18,6 +18,8 @@ export const PasswordResetCodeValidationService = async (
     ]);
   }
   if (!recoveryData.used) {
-    throw new AnyHttpError(200, "Reset code has already been used.")
+    throw new BadRequestError([
+      { message: "Reset code has already been used.", field: "secret" },
+    ]);
   }
 }
