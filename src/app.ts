@@ -6,7 +6,8 @@ import { Producer } from "./utils/Producer";
 import { amqp } from "./amqp";
 
 export const app = express();
-export const MailProducer = new Producer("ACCOUNT_CREATED", amqp)
+export const PasswordRecoveryPublisher = new Producer("RECOVERY_PASSWORD", amqp);
+export const MailProducer = new Producer("ACCOUNT_CREATED", amqp);
 
 app.use(json());
 app.use("/", router());
