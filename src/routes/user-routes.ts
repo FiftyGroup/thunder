@@ -1,6 +1,6 @@
 import express from 'express';
-import { findByUsername } from '../controllers/user/findByUsername';
+import FindByUsername from '../controllers/user/findByUsername';
 
 export default (router: express.Router) => {
-  router.get('/user/:username', findByUsername);
+  router.get('/user/:username', FindByUsername.handle);
 };

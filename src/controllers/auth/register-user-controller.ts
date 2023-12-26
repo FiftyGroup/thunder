@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
-import { RegisterService } from '../../services/register-service';
+import registerService from '../../services/register-service';
 
-export const RegisterController = async (req: Request, res: Response) => {
-  const { fullName, username, email, password } = req.body;
-  await RegisterService(fullName, username, email, password);
+export class RegisterController {
+  async handle(req: Request, res: Response) {
+    const { fullName, username, email, password } = req.body;
+    await registerService.handle(fullName, username, email, password);
 
-  return res.status(201).json({ message: 'Registro bem-sucedido' });
+    return res.status(201).json({ message: 'Successfully registered.' });
+  }
 };
+
+const registerController = new RegisterController();
+export default registerController;
