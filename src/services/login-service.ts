@@ -4,7 +4,6 @@ import jvt from "jsonwebtoken";
 import Unauthorized from "../errors/unauthorized-error";
 
 const prisma = new PrismaClient();
-
 export const loginService = async (username: string, password: string) => {
   const user = await prisma.user.findFirst({
     where: {

@@ -8,14 +8,14 @@ datasource db {
 }
 
 model User {
-  id                String              @id @unique @default(uuid())
+  id                String              @id @unique
   username          String              @unique
-  role              String              @default("user")
+  roles          String[]
   password          String
   fullName          String
   email             String              @unique
-  isVerified        Boolean             @default(true)
-  createdAt         DateTime            @default(now())
+  isVerified        Boolean       
+  createdAt         DateTime 
   deletedAt         DateTime?
   emailVerification EmailVerification[]
   sessions          Session[]
@@ -23,20 +23,20 @@ model User {
 }
 
 model EmailVerification {
-  id         String   @id @unique @default(uuid())
+  id         String   @id @unique 
   username   String
   email      String
   secretCode String
-  used       Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  expiredAt  DateTime
+  used       Boolean  
+  createdAt  DateTime 
+  expiresAt  DateTime
   userId     String
   user       User     @relation(fields: [userId], references: [id])
 }
 
 model Session {
-  id           String   @id @unique @default(uuid())
-  username     String   @unique
+  id           String   @id @unique
+  username     String
   refreshToken String
   userAgent    String
   ip           String
@@ -48,12 +48,12 @@ model Session {
 }
 
 model Recovery {
-  id         String   @id @default(uuid())
+  id         String   @id 
   userId     String
   user       User     @relation(fields: [userId], references: [id])
   secretCode String   @db.VarChar(150)
-  used       Boolean  @default(false)
-  createdAt  DateTime @default(now()) @map("created_at")
+  used       Boolean 
+  createdAt  DateTime 
   expiresAt  DateTime
 
   @@map(name: "Recovery")
