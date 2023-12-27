@@ -2,7 +2,10 @@ import "express-async-errors";
 import express, { json } from "express";
 import router from "./routes/index";
 import { errorHandler } from "./errors/error-handler";
+
 export const app = express();
+
+{/* CLASS INSTANCES */ }
 
 app.use(json());
 app.use("/", router());
