@@ -1,5 +1,5 @@
 import { IsJWT } from "class-validator";
-export class LogoutDTO {
+export default class LogoutDTO {
   @IsJWT()
   refreshToken: string;
 }
