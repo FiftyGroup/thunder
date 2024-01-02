@@ -1,14 +1,21 @@
 import "express-async-errors";
 import express, { json } from "express";
-import router from "./routes/index";
 import { errorHandler } from "./errors/error-handler";
-import { Producer } from "./utils/Producer";
+import { Producer } from "./infra/index";
 import { amqp } from "./amqp";
-
+import routes from "./routes/index";
+import { sequelize } from "./infra/database/database";
 export const app = express();
-export const PasswordRecoveryPublisher = new Producer("RECOVERY_PASSWORD", amqp);
-export const MailProducer = new Producer("ACCOUNT_CREATED", amqp);
+export const PasswordRecoveryPublisher = new Producer(
+  "RECOVERY_PASSWORD",
+  amqp
+);
 
-app.use(json());
-app.use("/", router());
-app.use(errorHandler);
+const startup = async () => {
+  await sequelize.sync();
+  app.use(json());
+  app.use(routes());
+  app.use(errorHandler);
+};
+
+startup();
