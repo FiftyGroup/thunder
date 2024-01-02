@@ -3,14 +3,22 @@ import { SessionModel } from "../models/SessionModel";
 import { Session } from "../../../domain/entities/Session";
 import { ParameterConverter } from "../ParameterConverter";
 import { ISessionRepository } from "../interfaces/ISessionRepository";
+import { Transaction } from "../Transaction";
 
 export class SessionRepository implements ISessionRepository {
   repository = SessionModel;
-  constructor(private readonly parameterConverter: ParameterConverter) {}
+  constructor(
+    private readonly parameterConverter: ParameterConverter,
+    private readonly transaction: Transaction
+  ) {}
   async save(session: Session, tid?: string): Promise<void> {
-    await this.repository.create({
-      ...session,
-    });
+    const transaction = this.transaction.getOne(tid);
+    await this.repository.create(
+      {
+        ...session,
+      },
+      { transaction }
+    );
   }
   async findOne(params: IFindOne, tid?: string): Promise<Session> {
     return (await this.repository.findOne({
@@ -18,13 +26,18 @@ export class SessionRepository implements ISessionRepository {
     })) as unknown as Session | null;
   }
   async deleteOne(params: IFindOne, tid?: string): Promise<void> {
+    const transaction = this.transaction.getOne(tid);
+
     await this.repository.destroy({
       ...(this.parameterConverter.convert(params) as unknown as any),
+      transaction,
     });
   }
   async deleteMany(params: IFindOne, tid?: string): Promise<void> {
+    const transaction = this.transaction.getOne(tid);
     await this.repository.destroy({
       ...(this.parameterConverter.convert(params) as unknown as any),
+      transaction,
     });
   }
 }

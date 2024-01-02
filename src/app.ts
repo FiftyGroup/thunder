@@ -12,7 +12,6 @@ export const PasswordRecoveryPublisher = new Producer(
 );
 
 const startup = async () => {
-  await sequelize.sync();
   app.use(json());
   app.use(routes());
   app.use(errorHandler);

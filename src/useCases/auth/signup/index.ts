@@ -3,6 +3,7 @@ import { Hasher, Producer, SecretGenerator } from "../../../infra";
 import {
   makeEmailVerificationRepository,
   makeUserRepository,
+  transaction,
 } from "../../../infra/database/repositories";
 import Signup from "./Signup";
 import SignupController from "./SignupController";
@@ -22,7 +23,8 @@ const makeSignUpController = () => {
     makeEmailVerificationRepository(),
     MailProducer,
     secretGenerator,
-    hasher
+    hasher,
+    transaction
   );
   const signupControllerClass = new SignupController(singup);
   return signupControllerClass.handle.bind(signupControllerClass);
