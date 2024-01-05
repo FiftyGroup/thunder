@@ -7,6 +7,6 @@ export default class LogoutController {
   }
   async handle(req: Request, res: Response) {
     await this.logout.execute(req.body.refreshToken);
-    res.send();
+    res.status(200).json({ message: "successfully logged-out" })
   }
 }
