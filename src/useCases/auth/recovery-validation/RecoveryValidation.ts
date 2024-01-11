@@ -8,17 +8,19 @@ export default class RecoveryValidation implements IRecoveryValidation {
     private readonly RecoveryRepository: IRecoveryRespository,
   ) { }
   async execute(secretCode: string): Promise<void> {
-    const user = await this.RecoveryRepository.findOne({
-      select: {},
+    const recovery = await this.RecoveryRepository.findOne({
+      select: {
+        used: true,
+      },
       secretCode
     });
 
-    if (!user) {
+    if (!recovery) {
       throw new BadRequestError([
         { message: "Invalid reset code.", field: "secretCode" },
       ]);
     }
-    if (user.used) {
+    if (recovery.used) {
       throw new BadRequestError([
         { message: "Reset code has already been used.", field: "secretCode" },
       ]);
