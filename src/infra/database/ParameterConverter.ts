@@ -51,7 +51,6 @@ export class ParameterConverter {
         obj.where[key] = param[key];
         continue;
       }
-
       if (param[key]?.similar) {
         const insensitive = param[key].insensitive;
         if (insensitive) {
@@ -59,7 +58,7 @@ export class ParameterConverter {
         } else {
           obj.where[key] = { [Op.like]: `${param[key].value}%` };
         }
-        return;
+        continue;
       }
       obj.where[key] = { [Op.like]: `${param[key].value}%` };
     }
