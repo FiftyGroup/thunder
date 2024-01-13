@@ -11,6 +11,7 @@ export interface IUserRepository {
   findMany(params: IFindMany): Promise<User[]>;
   deleteOne(params: IFindOne, tid?: string): Promise<void>;
   deleteMany(params: IFindOne, tid?: string): Promise<void>;
+  updateOne(params: IFindOne, data: Partial<User>, tid?: string): Promise<void>;
 }
 
 export interface IFindOne extends AdvancedSearch<User> {

@@ -18,6 +18,24 @@ export class EmailVerificationRepository
   ) {
     this.parameterConverter = parameterConverter;
   }
+  async updateOne(
+    params: IFindOne,
+    data: Partial<EmailVerification>,
+    tid?: string
+  ): Promise<void> {
+    const transaction = this.transaction.getOne(tid);
+    await this.repository.update(
+      {
+        ...data,
+      },
+
+      {
+        ...this.parameterConverter.convert(params),
+        transaction,
+        limit: 1,
+      }
+    );
+  }
   async save(
     emailVerification: EmailVerification,
     tid?: string

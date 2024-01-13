@@ -10,6 +10,11 @@ export interface IRecoveryRespository {
   findOne(params: IFindOne): Promise<Recovery | null>;
   deleteOne(params: IFindOne, tid?: string): Promise<void>;
   deleteMany(params: IFindOne, tid?: string): Promise<void>;
+  updateOne(
+    params: IFindOne,
+    data: Partial<Recovery>,
+    tid?: string
+  ): Promise<void>;
 }
 
 export interface IFindOne extends AdvancedSearch<Recovery> {
