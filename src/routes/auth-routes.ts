@@ -5,6 +5,7 @@ import { SignupDTO, makeSignUpController } from "../useCases/auth/signup";
 import { LogoutDTO, makeLogoutController } from "../useCases/auth/logout";
 import { RecoveryPasswordDTO, makeRecoveryPasswordController } from "../useCases/auth/recovery";
 import { makeRecoveryValidationController } from "../useCases/auth/recovery-validation";
+import { makeRecoveryResetController } from "../useCases/auth/recovery-reset";
 
 export default (router: express.Router) => {
   router.post(
@@ -29,6 +30,11 @@ export default (router: express.Router) => {
     makeRecoveryPasswordController()
   );
   router.get(
-    "/auth/recovery/:secretCode", makeRecoveryValidationController()
+    "/auth/recovery/:secretCode",
+    makeRecoveryValidationController()
+  );
+  router.post(
+    "/auth/recovery/:secretCode",
+    makeRecoveryResetController()
   );
 };
