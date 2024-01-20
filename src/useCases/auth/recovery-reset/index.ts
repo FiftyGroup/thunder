@@ -3,7 +3,7 @@ import { Hasher, Producer } from "../../../infra";
 import { makeRecoveryRepository, makeUserRepository, transaction } from "../../../infra/database/repositories";
 import RecoveryReset from "./RecoveryReset";
 import RecoveryResetController from "./RecoveryResetController";
-
+import RecoveryResetDTO from "./RecoveryResetDTO";
 
 const makeRecoveryResetController = () => {
   const MailProducer = new Producer("RECOVERY_PASSWORD", amqp);
@@ -21,5 +21,5 @@ const makeRecoveryResetController = () => {
   return RecoveryResetControllerClass.handle.bind(RecoveryResetControllerClass);
 };
 
-export { makeRecoveryResetController };
+export { makeRecoveryResetController, RecoveryResetDTO };
 

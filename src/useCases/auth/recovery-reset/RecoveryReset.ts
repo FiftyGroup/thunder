@@ -16,17 +16,6 @@ export default class RecoveryReset implements IRecoveryReset {
     private readonly publisher: IPubliser,
   ) { }
   async execute(secretCode: string, password: string): Promise<void> {
-    if (password.length < 8) {
-      throw new BadRequestError([
-        { message: "Senha muito pequena.", field: "password" },
-      ]);
-    }
-    if (password.length > 20) {
-      throw new BadRequestError([
-        { message: "Senha muito grande.", field: "password" },
-      ]);
-    }
-
     const recovery = await this.RecoveryRepository.findOne({
       secretCode: secretCode,
       select: {
@@ -38,7 +27,6 @@ export default class RecoveryReset implements IRecoveryReset {
     if (!recovery || recovery.used) {
       throw new Error('Invalid or expired secret code');
     }
-
 
     await this.transaction.run(async (tid) => {
       const userId = recovery.userId;
@@ -58,12 +46,6 @@ export default class RecoveryReset implements IRecoveryReset {
         {
           password: this.hasher.hash(password),
         }, tid);
-      await this.publisher.publish({
-        type: "RECOVERY_PASSWORD",
-        data: {
-          secretCode,
-        },
-      });
     });
   }
 };
