@@ -13,7 +13,6 @@ export default class RecoveryReset implements IRecoveryReset {
     private readonly RecoveryRepository: IRecoveryRespository,
     private readonly hasher: IHasher,
     private readonly transaction: Transaction,
-    private readonly publisher: IPubliser,
   ) { }
   async execute(secretCode: string, password: string): Promise<void> {
     const recovery = await this.RecoveryRepository.findOne({

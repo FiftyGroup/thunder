@@ -6,7 +6,6 @@ import RecoveryResetController from "./RecoveryResetController";
 import RecoveryResetDTO from "./RecoveryResetDTO";
 
 const makeRecoveryResetController = () => {
-  const MailProducer = new Producer("RECOVERY_PASSWORD", amqp);
   const hasher = new Hasher();
 
   const recoveryreset = new RecoveryReset(
@@ -14,7 +13,6 @@ const makeRecoveryResetController = () => {
     makeRecoveryRepository(),
     hasher,
     transaction,
-    MailProducer,
   );
 
   const RecoveryResetControllerClass = new RecoveryResetController(recoveryreset);
