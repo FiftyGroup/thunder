@@ -32,7 +32,7 @@ export default class RecoveryReset implements IRecoveryReset {
       await this.RecoveryRepository.updateOne(
         {
           select: {},
-          id: userId,
+          userId,
         },
         {
           used: false,
