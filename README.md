@@ -1,5 +1,3 @@
-# Nome do Seu Sistema
-
 ## Pré-requisitos
 
 Antes de rodar a aplicação, certifique-se de ter os seguintes requisitos instalados:
