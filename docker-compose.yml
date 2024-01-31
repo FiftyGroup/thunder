@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   rabbitmq:
@@ -7,3 +7,7 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+  mailer:
+    image: "fiftydev/mailer"
+    restart: always
+    container_name: "core-mailer"
