@@ -1,19 +1,41 @@
-# Thunder ⚡
+# Nome do Seu Sistema
 
-## Introduction
-Thunder is the name of the Core “mothership”, the idea of this system is to take care of the entire platform ecosystem.
+## Pré-requisitos
 
-## Pre-requisites
+Antes de rodar a aplicação, certifique-se de ter os seguintes requisitos instalados:
 
-- Node.js
-- Typescript
-- PostgreSQL
+- [Node.js](https://nodejs.org/) (versão 20.10.0)
+- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) (opcional, mas recomendado)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-## Development
+## Instalação
 
-Main IDE: [Visual Studio Code](https://code.visualstudio.com) <br>
-Engine: [Node](https://nodejs.org) <br>
-Database: [PostgreSQL](https://www.postgresql.org/)
+1. **Node.js**: Utilize o NVM para garantir que você está usando a versão correta do Node.js. Execute o seguinte comando no terminal para usar a versão correta:
+   <br/>
+   <br/>
 
-<br><br>
-Made with ❤️ by the Fifty team.
+⚠️ Certifique-se de ter o NVM instalado em sua máquina.
+
+```
+nvm use
+```
+
+## Rodando o Projeto
+
+⚠️ Antes de tentar rodar o projeto, crie um arquivo .env com base no .env.example.
+
+Inicie os serviços necessários usando o Docker Compose. Você pode fazer isso com o seguinte comando:
+<br/>
+<br/>
+⚠️ Certifique-se de ter o Docker e Docker Compose instalado em sua máquina.
+
+```
+docker compose up -d
+```
+
+Agora só resta iniciar a api através do comando:
+
+```
+npm run dev
+```
