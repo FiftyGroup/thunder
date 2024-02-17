@@ -5,7 +5,7 @@ Thunder is the name of the Core “mothership”, the idea of this system is to 
 
 ## Pre-requisites
 
-- Node.js
+- Node.js == 20.10.0
 - Typescript
 - PostgreSQL
 
