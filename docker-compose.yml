@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: "rabbitmq:latest"
+    container_name: "rabbitmq-server"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  mailer:
+    image: "fiftydev/mailer"
+    restart: always
+    container_name: "core-mailer"
